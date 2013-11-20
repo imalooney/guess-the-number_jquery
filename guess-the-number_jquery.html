@@ -1,0 +1,92 @@
+<html>
+<head>
+  <title>Guess the Number!</title>
+</head>
+<body>
+
+  <label>Pick a Number from 1-100:</label>
+
+  <input id="user-input" type="text" />
+  <b><label id="games-won"></label></b>
+  <br/>
+  <input id="submit-button" type="button" value="Guess" />
+  <br />
+  <input id="reset-button" type="button" value="New game" />
+  <br/>
+  <b><label id="response"></label></b>
+
+
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+  <script type="text/javascript">
+
+ 
+    //Number guessing game =-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    //Javascript / jquery 
+
+    //Number generator function
+    var generateRandom = function() {
+      return parseInt(Math.random() * 100, 10) + 1;
+    }
+
+    //Initialise all our message response variables
+    var higher = 'Try a higher number!';
+    var lower = 'Try a lower number!';
+    var correct = 'Congrats, you got the right number!';
+    var promptMessage = 'Enter a number between 1 and 100';
+    var newGameStarted = 'A new game has started!';
+
+    //Check number code
+    var checkNumber = function(userNumber, randomNumber) {
+      if (userNumber < 0 || userNumber > 100 ) { 
+        return promptMessage;
+      }
+      else if (userNumber > randomNumber) {
+        return lower;
+      } 
+      else if (userNumber < randomNumber) {
+        return higher;
+      }
+      else {
+        gamesWon++;
+        return correct;
+      }
+    }
+
+    //Initialise some variables with a default value
+    var randomNumber = generateRandom();
+    var gamesWon = 0;
+    $('#games-won').text(gamesWon + ' games won')
+
+
+
+   $('#user-input').on('keydown==13', answer);
+
+   $('#submit-button').on('click', function (e) {
+      $('#response').show();
+      var userNumber = $('#user-input').val();
+      var checkResult = checkNumber(userNumber, randomNumber);
+      $('#user-input').focus(function(){
+        $('#response').hide();
+        $('#user-input').val('');
+      });
+      $('#response').text(checkResult)
+      $('#games-won').text(gamesWon + ' games won')
+    })
+
+
+
+   $('#reset-button').on('click', function (e) {
+      randomNumber = generateRandom();
+      $('#user-input').val('')
+      $('#response').text(newGameStarted)
+   })
+
+    
+    
+
+  </script>
+
+</body>
+</html>
