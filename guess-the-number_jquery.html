@@ -1,11 +1,23 @@
 <html>
 <head>
-  <title>Guess the Number!</title>
+  <title>Landmine Terror</title>
+  <style type="text/css">
+    * {
+      font-family: sans-serif;
+    }
+    #user_progress {
+      border: 1px solid red;
+      width: 10px;
+      height: 20px;
+      background-color: red;
+      margin: 100px 0 0 0;
+    }
+  </style>
 </head>
 <body>
-
-  <label>Pick a Number from 1-100:</label>
-
+  <h1>Landmine Terror</h1>
+  <p>Warning: Your browser will self-destruct if you step on the landmine!</p>
+  <label>Pick a Number from 1-100 to approach the treasure:</label>
   <input id="user-input" type="text" />
   <b><label id="games-won"></label></b>
   <br/>
@@ -14,6 +26,7 @@
   <input id="reset-button" type="button" value="New game" />
   <br/>
   <b><label id="response"></label></b>
+  <div id="user_progress"></div>
 
 
 
