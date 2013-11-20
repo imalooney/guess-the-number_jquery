@@ -55,11 +55,12 @@
     }
 
    //Initialise some variables with a default value
-    var randomNumber = generateRandom();
+    var randomNumber = generateRandom(); //Call the generateRandom function for randomNumber
     var gamesWon = 0;
     $('#games-won').text(gamesWon + ' games won');
 
 
+    //Answer function - checks the user-input against the random number and responds with certain status messages
     var answer = function() {
       $('#response').show();
       var userNumber = $('#user-input').val();
@@ -73,22 +74,27 @@
     };
 
 
-  // $('#user-input').on('keydown==13', answer);
+
+  //Listen for a return keypress (13). 
    $("#user-input").keypress(function(event) {
      if (event.which==13) {
         answer();
+        //Clear the input box
         $('#user-input').val('');
           
+        //Listen for any key press to clear the response message
         $('#user-input').on('keydown', function (e) {
           $('#response').hide();
         });
      }
     });
 
+   //On a click of the submit-button execute the answer function
    $('#submit-button').on('click', answer);
 
 
 
+   //Reset button - resets the game on click
    $('#reset-button').on('click', function (e) {
       randomNumber = generateRandom();
       $('#user-input').val('');
