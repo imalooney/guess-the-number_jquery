@@ -54,16 +54,13 @@
       }
     }
 
-    //Initialise some variables with a default value
+   //Initialise some variables with a default value
     var randomNumber = generateRandom();
     var gamesWon = 0;
-    $('#games-won').text(gamesWon + ' games won')
+    $('#games-won').text(gamesWon + ' games won');
 
 
-
-   $('#user-input').on('keydown==13', answer);
-
-   $('#submit-button').on('click', function (e) {
+    var answer = function() {
       $('#response').show();
       var userNumber = $('#user-input').val();
       var checkResult = checkNumber(userNumber, randomNumber);
@@ -73,15 +70,30 @@
       });
       $('#response').text(checkResult)
       $('#games-won').text(gamesWon + ' games won')
-    })
+    };
+
+
+  // $('#user-input').on('keydown==13', answer);
+   $("#user-input").keypress(function(event) {
+     if (event.which==13) {
+        answer();
+        $('#user-input').val('');
+          
+        $('#user-input').on('keydown', function (e) {
+          $('#response').hide();
+        });
+     }
+    });
+
+   $('#submit-button').on('click', answer);
 
 
 
    $('#reset-button').on('click', function (e) {
       randomNumber = generateRandom();
-      $('#user-input').val('')
-      $('#response').text(newGameStarted)
-   })
+      $('#user-input').val('');
+      $('#response').text(newGameStarted);
+   });
 
     
     
