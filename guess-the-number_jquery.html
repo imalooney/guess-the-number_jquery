@@ -5,13 +5,29 @@
     * {
       font-family: sans-serif;
     }
+
+    #graphic_display {
+      width: 100%;
+    }
+
+    #progress_potential {
+      width: 80%;
+    }
+
     #user_progress {
       border: 1px solid red;
-      width: 10px;
+      width: 40px;
       height: 20px;
       background-color: red;
       margin: 100px 0 0 0;
+      float:left;
     }
+
+    #green_card {
+      float:right;
+      width:20%;
+    }
+
   </style>
 </head>
 <body>
@@ -26,8 +42,14 @@
   <input id="reset-button" type="button" value="New game" />
   <br/>
   <b><label id="response"></label></b>
-  <div id="user_progress"></div>
-
+  <div id="graphic_display">
+    <div id="progress_potential">
+      <div id="user_progress"></div>
+    </div>
+    <div id="green_card">
+      <img width="200" src="images/green_card.jpg" />
+    </div>
+  </div>
 
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -49,6 +71,10 @@
     var correct = 'Congrats, you got the right number!';
     var promptMessage = 'Enter a number between 1 and 100';
     var newGameStarted = 'A new game has started!';
+    //Make progress bar grow when answer is submitted
+    var grow_bar = function(){
+      $('#user_progress').css('width', '+=40');
+    };
 
     //Check number code
     var checkNumber = function(userNumber, randomNumber) {
@@ -56,9 +82,11 @@
         return promptMessage;
       }
       else if (userNumber > randomNumber) {
+        grow_bar();
         return lower;
       } 
       else if (userNumber < randomNumber) {
+        grow_bar();
         return higher;
       }
       else {
